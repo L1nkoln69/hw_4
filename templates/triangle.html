@@ -5,15 +5,15 @@
     <title>Hypotenuse</title>
 </head>
 <body>
-    <form action="{% url 'polls:triangle' %}" method="post">
-        {% csrf_token %}
+
         {% if Hypotenuse %}
-            {{ form.as_p }}
-            <p> гипотенуза равна Hypotenuse </p>
+            <p> гипотенуза равна {{ Hypotenuse }} </p>
         {% else %}
+            <form action="{% url 'polls:triangle' %}" method="post">
+            {% csrf_token %}
             {{ form.as_p }}
-        {% endif %}
         <input type="submit">
+        {% endif %}
     </form>
 </body>
 </html>

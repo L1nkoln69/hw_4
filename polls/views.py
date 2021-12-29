@@ -61,12 +61,10 @@ def triangle(request):
     if request.method == 'POST':
         form = Triangle(request.POST)
         if form.is_valid():
-            print(form.cleaned_data)
-            if form.cleaned_data['Cathetus_1'] and form.cleaned_data['Cathetus_2'] is float:
-                Hypotenuse = sqrt((form.cleaned_data['Cathetus_1']) ** 2 + (form.cleaned_data['Cathetus_2']) ** 2)
-            return redirect("polls:triangle")
-        else:
-            form = Triangle()
+            Hypotenuse = sqrt((form.cleaned_data['Cathetus_1']) ** 2 + (form.cleaned_data['Cathetus_2']) ** 2)
+            return render(request, 'triangle.html', {
+                'Hypotenuse': Hypotenuse,
+            })
     else:
         form = Triangle()
     return render(request, 'triangle.html', {
