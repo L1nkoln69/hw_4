@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hypotenuse</title>
+</head>
+<body>
+    <form action="{% url 'polls:triangle' %}" method="post">
+        {% csrf_token %}
+        {% if Hypotenuse %}
+            {{ form.as_p }}
+            <p> гипотенуза равна Hypotenuse </p>
+        {% else %}
+            {{ form.as_p }}
+        {% endif %}
+        <input type="submit">
+    </form>
+</body>
+</html>

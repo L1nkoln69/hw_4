@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
 </head>
 <body>
+    <p><a href="{% url 'polls:triangle' %}">Hypotenuse of a triangle</a></p>
     {% if latest_question_list %}
         <ul>
         {% for question in latest_question_list %}

@@ -1,10 +1,12 @@
+from math import sqrt
+
 from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect  # noqa I101
 from django.urls import reverse
 from django.utils import timezone
 from django.views import generic
 
-
+from .forms import Triangle
 from .models import Choice, Question
 
 
@@ -53,3 +55,20 @@ def vote(request, question_id):
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
         return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
+
+
+def triangle(request):
+    if request.method == 'POST':
+        form = Triangle(request.POST)
+        if form.is_valid():
+            print(form.cleaned_data)
+            if form.cleaned_data['Cathetus_1'] and form.cleaned_data['Cathetus_2'] is float:
+                Hypotenuse = sqrt((form.cleaned_data['Cathetus_1']) ** 2 + (form.cleaned_data['Cathetus_2']) ** 2)
+            return redirect("polls:triangle")
+        else:
+            form = Triangle()
+    else:
+        form = Triangle()
+    return render(request, 'triangle.html', {
+        'form': form,
+    })
