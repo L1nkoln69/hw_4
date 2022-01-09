@@ -62,7 +62,7 @@ def triangle(request):
     if request.method == 'POST':
         form = Triangle(request.POST)
         if form.is_valid():
-            Hypotenuse = sqrt((form.cleaned_data['Cathetus_1']) ** 2 + (form.cleaned_data['Cathetus_2']) ** 2)
+            Hypotenuse = sqrt((form.cleaned_data['cathetus_1']) ** 2 + (form.cleaned_data['cathetus_2']) ** 2)
             return render(request, 'triangle.html', {
                 'Hypotenuse': Hypotenuse,
             })
