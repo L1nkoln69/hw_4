@@ -5,7 +5,6 @@
     <title>Hypotenuse</title>
 </head>
 <body>
-
         {% if Hypotenuse %}
             <p> гипотенуза равна {{ Hypotenuse }} </p>
         {% else %}
@@ -13,7 +12,7 @@
             {% csrf_token %}
             {{ form.as_p }}
         <input type="submit">
+            </form>
         {% endif %}
-    </form>
 </body>
 </html>

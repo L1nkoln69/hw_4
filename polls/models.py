@@ -30,3 +30,24 @@ class Choice(models.Model):
 
     def __str__(self):
         return self.choice_text
+
+
+class Person(models.Model):
+    first_name = models.CharField(max_length=20)
+    last_name = models.CharField(max_length=20)
+    email = models.EmailField(max_length=40)
+
+    def get_absolute_url(self):
+        return reverse(args=[str(self.id)]) # noqa F821
+
+    def __str__(self):
+        return '%s, %s' % (self.last_name, self.first_name)
+
+
+class ModelLog(models.Model):
+    path = models.CharField(max_length=300)
+    method = models.CharField(max_length=30)
+    timestamp = models.TimeField(auto_now=True)
+
+    def __str__(self):
+        return self.path

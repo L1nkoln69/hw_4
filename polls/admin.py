@@ -1,7 +1,7 @@
 
 from django.contrib import admin
 
-from .models import Choice, Question
+from .models import Choice, ModelLog, Question
 
 
 class QuestionAdmin(admin.ModelAdmin):
@@ -26,6 +26,11 @@ class QuestionAdmin(admin.ModelAdmin):  # noqa: F811
         ('Date information', {'fields': ['pub_date'], 'classes': ['collapse']}),
     ]
     inlines = [ChoiceInline]
+
+
+@admin.register(ModelLog)
+class ModelLog(admin.ModelAdmin):
+    pass
 
 
 admin.site.register(Question, QuestionAdmin)

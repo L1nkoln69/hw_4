@@ -6,8 +6,9 @@ from django.urls import reverse
 from django.utils import timezone
 from django.views import generic
 
+from .forms import PersonForm
 from .forms import Triangle
-from .models import Choice, Question
+from .models import Choice, Person, Question
 
 
 class IndexView(generic.ListView):
@@ -70,3 +71,28 @@ def triangle(request):
     return render(request, 'triangle.html', {
         'form': form,
     })
+
+
+def person(request):
+    if request.method == 'POST':
+        form = PersonForm(request.POST)
+        if form.is_valid():
+            new_person = form.save()  # noqa F841
+            return redirect("/polls")
+    else:
+        form = PersonForm()
+    return render(request, 'person.html', {
+        'form': form,
+    })
+
+
+def change_person(request, pk):
+    new_person = get_object_or_404(Person, pk=pk)
+    if request.method == 'POST':
+        form = PersonForm(request.POST, instance=new_person)
+        if form.is_valid():
+            form.save()
+            return redirect("/polls")
+    else:
+        form = PersonForm(instance=new_person)
+    return render(request, 'person.html', {'form': form, })
